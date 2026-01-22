@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Islettes Twirl Team - get in touch for questions, enrollment, tryouts, or general information.">
+  <meta name="keywords" content="contact, baton twirling, enrollment, registration, questions">
+  <meta name="author" content="Islettes Twirl Team">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Contact Us - Islettes Twirl Team">
+  <meta property="og:description" content="Get in touch with Islettes Twirl Team for enrollment, questions, or more information.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.github.io/islettes-twirl/contact.html">
+
+  <title>Contact Us - Islettes Twirl Team</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <style>
+    /* Form message styles */
+    .form-message {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .form-message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-info-item .icon {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--neutral-lighter) 0%, var(--neutral-light) 100%);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-medium);
+      font-style: italic;
+      margin-top: var(--spacing-md);
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo">
+        <span>✨</span>
+        <span>Islettes Twirl Team</span>
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="menu-toggle" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Main Navigation -->
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Contact Us</h1>
+        <p class="hero-subtitle">
+          We'd love to hear from you! Get in touch with questions, enrollment information, or just to say hello.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info-grid">
+          <div class="contact-info-item">
+            <div class="icon">📧</div>
+            <div>
+              <h3>Email</h3>
+              <p><a href="mailto:info@islettestwirl.com">info@islettestwirl.com</a></p>
+              <p style="font-size: 0.9rem; color: var(--neutral-medium);">
+                We typically respond within 24 hours
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="icon">📞</div>
+            <div>
+              <h3>Phone</h3>
+              <p><a href="tel:5551234567">(555) 123-4567</a></p>
+              <p style="font-size: 0.9rem; color: var(--neutral-medium);">
+                Mon-Fri: 9:00 AM - 6:00 PM<br>
+                Sat: 10:00 AM - 2:00 PM
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="icon">📍</div>
+            <div>
+              <h3>Location</h3>
+              <p>
+                Islettes Twirl Training Center<br>
+                123 Performance Way<br>
+                Your City, ST 12345
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="icon">⏰</div>
+            <div>
+              <h3>Office Hours</h3>
+              <p>
+                Monday - Friday: 2:00 PM - 8:00 PM<br>
+                Saturday: 9:00 AM - 5:00 PM<br>
+                Sunday: Closed
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">Send Us a Message</h2>
+        <div style="max-width: 700px; margin: 0 auto;">
+          <form id="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name">Full Name <span style="color: var(--secondary-color);">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+                aria-required="true"
+                placeholder="Your full name"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span style="color: var(--secondary-color);">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+                aria-required="true"
+                placeholder="your.email@example.com"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-control"
+                placeholder="(555) 123-4567"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject <span style="color: var(--secondary-color);">*</span></label>
+              <select
+                id="subject"
+                name="subject"
+                class="form-control"
+                required
+                aria-required="true"
+              >
+                <option value="">-- Select a subject --</option>
+                <option value="enrollment">New Enrollment / Registration</option>
+                <option value="programs">Program Information</option>
+                <option value="tryouts">Competitive Team Tryouts</option>
+                <option value="events">Events & Performances</option>
+                <option value="private-lessons">Private Lessons</option>
+                <option value="general">General Question</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span style="color: var(--secondary-color);">*</span></label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-control"
+                required
+                aria-required="true"
+                placeholder="Please provide details about your inquiry..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox" name="newsletter" id="newsletter">
+                <span>Yes, I'd like to receive updates about events and programs</span>
+              </label>
+            </div>
+
+            <p style="font-size: 0.9rem; color: var(--neutral-medium); margin-bottom: 1.5rem;">
+              <span style="color: var(--secondary-color);">*</span> Required fields
+            </p>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Map -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Visit Our Facility</h2>
+        <p class="text-center" style="margin-bottom: 2rem;">
+          We welcome visitors! Stop by during office hours for a tour of our
+          state-of-the-art training facility.
+        </p>
+        <div class="map-placeholder">
+          [Interactive Map Placeholder - 123 Performance Way, Your City, ST 12345]
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div class="card">
+            <h3>How do I enroll my child?</h3>
+            <p>
+              You can enroll by filling out the contact form above, calling our office,
+              or visiting during office hours. We'll discuss your child's age, experience
+              level, and interests to recommend the best program.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <h3>Do you offer trial classes?</h3>
+            <p>
+              Yes! We offer a free trial class for new students. This gives your child
+              a chance to experience baton twirling and meet our coaches before making
+              a commitment.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <h3>What should my child bring to the first class?</h3>
+            <p>
+              Wear comfortable athletic clothing and bring water. We provide batons for
+              beginners. As students progress, we'll recommend appropriate equipment
+              for purchase.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <h3>How do I join the competitive team?</h3>
+            <p>
+              Competitive team membership requires a tryout or evaluation with our coaches.
+              Tryouts are typically held in September. Contact us to schedule an evaluation
+              or learn about the next tryout date.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <h3>What are the costs involved?</h3>
+            <p>
+              Monthly tuition varies by program level (see our Programs page for details).
+              Additional costs may include competition fees, costumes, travel for competitive
+              team members, and optional events. We offer payment plans and some scholarship
+              opportunities.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <h3>Can adults join?</h3>
+            <p>
+              While our primary focus is on youth programming, we occasionally offer adult
+              workshops and classes. Contact us to express your interest and we'll notify
+              you when adult programs are available.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Media -->
+    <section class="section">
+      <div class="container text-center">
+        <h2 class="section-title">Connect With Us</h2>
+        <p style="margin-bottom: 2rem;">
+          Follow us on social media for the latest updates, photos, and team news
+        </p>
+        <div class="social-links" style="justify-content: center; font-size: 1.2rem;">
+          <a href="#" class="social-link" aria-label="Follow us on Facebook">
+            <span style="font-weight: bold;">Facebook</span>
+          </a>
+          <a href="#" class="social-link" aria-label="Follow us on Instagram">
+            <span style="font-weight: bold;">Instagram</span>
+          </a>
+          <a href="#" class="social-link" aria-label="Follow us on Twitter">
+            <span style="font-weight: bold;">Twitter</span>
+          </a>
+          <a href="#" class="social-link" aria-label="Subscribe on YouTube">
+            <span style="font-weight: bold;">YouTube</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Islettes Twirl Team</h3>
+          <p>
+            Excellence in baton twirling since 2010. We inspire young athletes
+            to achieve their dreams through dedication and teamwork.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li>Email: info@islettestwirl.com</li>
+            <li>Phone: (555) 123-4567</li>
+            <li>Location: Your City, State</li>
+          </ul>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">F</a>
+            <a href="#" class="social-link" aria-label="Instagram">I</a>
+            <a href="#" class="social-link" aria-label="Twitter">T</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Islettes Twirl Team. All rights reserved. | <a href="#">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
