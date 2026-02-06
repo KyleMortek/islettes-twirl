@@ -7,17 +7,17 @@
    CSS VARIABLES
    ============================================ */
 :root {
-  /* Color Palette - Elegant & Athletic */
-  --primary-color: #8b4789;        /* Deep purple - performance elegance */
-  --primary-dark: #6b3569;
-  --primary-light: #b077ae;
-  --secondary-color: #e84855;       /* Vibrant coral red - energy */
-  --secondary-dark: #c83845;
-  --accent-gold: #f4a261;           /* Gold accent - achievement */
-  --neutral-dark: #2d3142;          /* Deep blue-gray - text */
-  --neutral-medium: #4f5d75;
-  --neutral-light: #bfc0c0;
-  --neutral-lighter: #f0f0f0;
+  /* Color Palette - Ladybug: Red, Black & White */
+  --primary-color: #d62828;        /* Bold red - ladybug red */
+  --primary-dark: #a31e1e;
+  --primary-light: #e85d5d;
+  --secondary-color: #1a1a1a;       /* Rich black - ladybug spots */
+  --secondary-dark: #000000;
+  --accent-gold: #d62828;           /* Red accent - consistent theme */
+  --neutral-dark: #1a1a1a;          /* Black - text */
+  --neutral-medium: #4a4a4a;
+  --neutral-light: #c8c8c8;
+  --neutral-lighter: #f5f5f5;
   --white: #ffffff;
 
   /* Typography */
@@ -301,7 +301,7 @@ p {
   background-color: var(--secondary-dark);
   border-color: var(--secondary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(232, 72, 85, 0.4);
+  box-shadow: 0 4px 12px rgba(214, 40, 40, 0.4);
 }
 
 .btn-secondary {
@@ -431,7 +431,7 @@ p {
 .form-control:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(139, 71, 137, 0.1);
+  box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.1);
 }
 
 textarea.form-control {
