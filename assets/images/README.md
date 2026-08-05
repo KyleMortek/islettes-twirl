@@ -9,7 +9,7 @@ out and the artwork auto-cropped, so they sit cleanly on any colour.
 | File | Size | Used for |
 |---|---|---|
 | `logo.png` | 1200×1156 | Footer, and anywhere on a light background |
-| `logo-on-dark.png` | 1200×1156 | Hero, and anywhere on navy — cream line work instead of navy, so it stays legible |
+| `logo-on-dark.png` | 1200×1156 | Hero, and anywhere on a dark surface — cream line work instead of navy, so it stays legible. This is the one place the real logo's original navy ink is preserved; the rest of the site runs black/white/red. |
 | `logo-mark.png` | 420×405 | Header |
 | `og-image.png` | 1200×630 | Link previews (Facebook, iMessage, Slack) |
 | `../icons/favicon.svg` | vector | Browser tab (modern browsers) |
@@ -20,16 +20,19 @@ out and the artwork auto-cropped, so they sit cleanly on any colour.
 
 `ladybug.svg`, `star-constellation.svg`, `baton.svg`, `divider-wave.svg`.
 
-Each accepts CSS custom properties for colour, so they recolour with the
-theme instead of needing separate light and dark files:
-
-```css
-.my-thing { --ladybug-shell: #A23F3D; --ladybug-ink: #1A3057; }
-```
+Each file's shapes reference a CSS custom property with a hardcoded
+fallback, e.g. `stroke="var(--ladybug-ink, #141414)"`. **The fallback is
+what actually renders on this site** — every usage is an `<img src="...">`
+or a CSS `background: url(...)`, both of which load the SVG as an
+external document, and a page's CSS custom properties do not inherit
+across that boundary. The `var(--x, ...)` only takes effect if a file is
+inlined directly as `<svg>...</svg>` in the HTML, which nothing here
+currently does. To change these icons' colour, edit the fallback hex
+inside the SVG file itself.
 
 ## Photo slots — where real photos go
 
-Anywhere you see a maroon-to-navy gradient panel with a faded ladybug,
+Anywhere you see a maroon-to-black gradient panel with a faded ladybug,
 that's a `.photo-slot` waiting for a real photo.
 
 ### On `about.html`

@@ -1,6 +1,8 @@
 /* ============================================================
    Islettes' Elite Dance Twirl Team
-   Palette sampled directly from the team logo.
+   Black / white / red. The header, footer, and hero logo artwork
+   keep the real team logo's navy ink — the one deliberate nod to
+   the original branding — everything else runs on this palette.
    ============================================================ */
 
 :root {
@@ -9,27 +11,25 @@
   --lady-red-dk:   #7E2F2E;   /* hover / pressed */
   --lady-red-lt:   #C86B69;
   --lady-red-soft: #F3E2E0;
-  --navy:          #1A3057;   /* logo outlines, constellation */
-  --navy-dk:       #101E38;
-  --navy-lt:       #2E4A80;
-  --navy-soft:     #E2E6EF;
-  --spot:          #14213D;
-  --cream:         #FDF8F4;
+  --black:         #111111;   /* primary dark — near-black reads less harsh than #000 on large fills */
+  --black-dk:      #000000;   /* footer, deepest surface */
   --white:         #FFFFFF;
 
   /* Semantic ----------------------------------------------- */
-  --bg:            var(--cream);
+  --bg:            var(--white);
   --bg-alt:        var(--white);
   --surface:       var(--white);
-  --surface-2:     #F4EEE9;
-  --ink:           var(--navy);
-  --ink-muted:     #4E5D78;
+  --surface-2:     #F2F2F2;
+  --black-soft:    #EAEAEA;   /* neutral tint for callouts/tags — was navy-soft */
+  --ink:           var(--black);
+  --ink-muted:     #595959;
   --accent:        var(--lady-red);
   --accent-ink:    var(--lady-red);   /* accent used as text */
-  --border:        #E4DCD5;
-  --shadow-color:  26 48 87;
+  --border:        #E0E0E0;
+  --shadow-color:  0 0 0;
 
-  /* Never pair --lady-red text on --navy: 1.8:1. Use white on either. */
+  /* Never pair --lady-red text on --black: 2.98:1, fails AA for anything
+     but large headings. Use white on either. */
 
   /* Type --------------------------------------------------- */
   --font-display: ui-serif, Georgia, "Iowan Old Style", "Palatino Linotype", serif;
@@ -64,18 +64,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:        var(--navy-dk);
-    --bg-alt:    #16264a;
-    --surface:   #16264a;
-    --surface-2: #1E3462;
-    --ink:       #EAF0FA;
-    --ink-muted: #A9B8D2;
+    --bg:        #0A0A0A;
+    --bg-alt:    #1A1A1A;
+    --surface:   #1A1A1A;
+    --surface-2: #242424;
+    --ink:       #F2F2F2;
+    --ink-muted: #B3B3B3;
     --accent:    var(--lady-red);
-    --accent-ink: #E5948D;      /* 7.1:1 on --navy-dk; the flat red is not */
-    --border:    #2B4272;
-    --navy-soft: #1E3462;
+    --accent-ink: #E5948D;      /* 8.44:1 on --bg; the flat red is not */
+    --border:    #333333;
+    --black-soft: #262626;
     --lady-red-soft: #3A2220;
-    --shadow-color: 5 10 24;
+    --shadow-color: 0 0 0;
   }
 }
 
@@ -154,9 +154,9 @@ small { font-size: var(--step--1); }
 @media (min-width: 48em) { .section { padding-block: var(--sp-2xl); } }
 
 .bg-light   { background: var(--surface-2); }
-.bg-navy    { background: var(--navy); color: #fff; }
-.bg-navy h1, .bg-navy h2, .bg-navy h3 { color: #fff; }
-.bg-navy a  { color: #fff; }
+.bg-dark    { background: var(--black); color: #fff; }
+.bg-dark h1, .bg-dark h2, .bg-dark h3 { color: #fff; }
+.bg-dark a  { color: #fff; }
 
 .text-center { text-align: center; }
 .measure { max-inline-size: var(--measure); }
@@ -203,7 +203,7 @@ small { font-size: var(--step--1); }
   inset-inline-start: var(--sp-sm);
   z-index: 200;
   padding: var(--sp-2xs) var(--sp-sm);
-  background: var(--navy);
+  background: var(--black);
   color: #fff;
   border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   text-decoration: none;
@@ -251,10 +251,10 @@ small { font-size: var(--step--1); }
 }
 .btn-secondary:hover { background: var(--ink); color: var(--bg); }
 
-.bg-navy .btn-secondary,
+.bg-dark .btn-secondary,
 .hero .btn-secondary { color: #fff; border-color: #fff; }
-.bg-navy .btn-secondary:hover,
-.hero .btn-secondary:hover { background: #fff; color: var(--navy); }
+.bg-dark .btn-secondary:hover,
+.hero .btn-secondary:hover { background: #fff; color: var(--black); }
 
 .btn:disabled, .btn[aria-disabled="true"] {
   opacity: 0.55;
@@ -390,7 +390,7 @@ small { font-size: var(--step--1); }
   position: relative;
   isolation: isolate;
   padding-block: var(--sp-2xl);
-  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dk) 100%);
+  background: linear-gradient(160deg, var(--black) 0%, var(--black-dk) 100%);
   color: #fff;
   overflow: hidden;
 }
@@ -415,7 +415,7 @@ small { font-size: var(--step--1); }
 }
 .hero-subtitle {
   font-size: var(--step-1);
-  color: #DCE4F2;
+  color: #E0E0E0;
   margin-block: var(--sp-sm) var(--sp-lg);
 }
 .hero .eyebrow { color: #F0B9B4; }
@@ -483,7 +483,7 @@ small { font-size: var(--step--1); }
 .unit-card[data-unit="starlettes"]::before     { background: #E2A3A0; }
 .unit-card[data-unit="shooting_stars"]::before { background: var(--lady-red-lt); }
 .unit-card[data-unit="rising_stars"]::before   { background: var(--lady-red); }
-.unit-card[data-unit="starfire"]::before       { background: var(--navy); }
+.unit-card[data-unit="starfire"]::before       { background: var(--black); }
 
 .unit-grade {
   display: inline-block;
@@ -541,20 +541,20 @@ small { font-size: var(--step--1); }
   font-size: var(--step--1);
   color: var(--ink-muted);
 }
-.bg-navy .stat-tile {
+.bg-dark .stat-tile {
   background: rgb(255 255 255 / 0.07);
   border-color: rgb(255 255 255 / 0.18);
 }
-.bg-navy .stat-tile .stat-value { color: #fff; }
-.bg-navy .stat-tile .stat-label { color: #C9D5EA; }
+.bg-dark .stat-tile .stat-value { color: #fff; }
+.bg-dark .stat-tile .stat-label { color: #D9D9D9; }
 
 /* Callout */
 .callout {
   display: flex;
   gap: var(--sp-sm);
   padding: var(--sp-md);
-  background: var(--navy-soft);
-  border-inline-start: 5px solid var(--navy);
+  background: var(--black-soft);
+  border-inline-start: 5px solid var(--black);
   border-radius: var(--radius-sm);
 }
 .callout-accent {
@@ -602,11 +602,11 @@ small { font-size: var(--step--1); }
   font-size: var(--step--1);
   font-weight: 600;
   border-radius: var(--radius-pill);
-  background: var(--navy-soft);
+  background: var(--black-soft);
   color: var(--ink);
 }
 .tag-competition { background: var(--lady-red-soft); color: var(--accent-ink); }
-.tag-parade      { background: var(--navy-soft); }
+.tag-parade      { background: var(--black-soft); }
 
 /* ============================================================
    PHOTO SLOTS & GALLERY
@@ -618,7 +618,7 @@ small { font-size: var(--step--1); }
   aspect-ratio: 4 / 3;
   background:
     linear-gradient(135deg,
-      color-mix(in srgb, var(--navy) 92%, black) 0%,
+      var(--black-dk) 0%,
       var(--lady-red) 100%);
   border-radius: var(--radius);
   overflow: hidden;
@@ -685,10 +685,10 @@ small { font-size: var(--step--1); }
   display: grid;
   place-items: center;
   padding: var(--sp-sm);
-  background: rgb(8 14 30 / 0.92);
+  background: rgb(5 5 5 / 0.92);
   border: 0;
 }
-.lightbox::backdrop { background: rgb(8 14 30 / 0.92); }
+.lightbox::backdrop { background: rgb(5 5 5 / 0.92); }
 .lightbox img { max-block-size: 82vh; border-radius: var(--radius-sm); }
 .lightbox figcaption {
   margin-block-start: var(--sp-xs);
@@ -862,15 +862,15 @@ textarea.form-control { min-block-size: 9rem; resize: vertical; }
    ============================================================ */
 .site-footer {
   padding-block: var(--sp-xl) var(--sp-md);
-  background: var(--navy-dk);
-  color: #C9D5EA;
+  background: var(--black-dk);
+  color: #D9D9D9;
 }
 .site-footer h3 {
   font-size: var(--step-0);
   color: #fff;
   margin-block-end: var(--sp-2xs);
 }
-.site-footer a { color: #DCE4F2; text-decoration: none; }
+.site-footer a { color: #E8E8E8; text-decoration: none; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
 .footer-content {
   display: grid;

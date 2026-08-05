@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-  <circle cx="50" cy="58.5" r="38" fill="var(--ladybug-shell, #A23F3D)" stroke="var(--ladybug-ink, #1A3057)" stroke-width="4"/>
-  <path d="M50 24.5V98" stroke="var(--ladybug-ink, #1A3057)" stroke-width="4.4" stroke-linecap="round"/>
-  <g fill="var(--ladybug-ink, #1A3057)">
+  <circle cx="50" cy="58.5" r="38" fill="var(--ladybug-shell, #A23F3D)" stroke="var(--ladybug-ink, #141414)" stroke-width="4"/>
+  <path d="M50 24.5V98" stroke="var(--ladybug-ink, #141414)" stroke-width="4.4" stroke-linecap="round"/>
+  <g fill="var(--ladybug-ink, #141414)">
     <circle cx="32.5" cy="50" r="7.2"/>
     <circle cx="67.5" cy="50" r="7.2"/>
     <circle cx="30.5" cy="70" r="6"/>
     <circle cx="69.5" cy="70" r="6"/>
   </g>
-  <circle cx="50" cy="24.5" r="17.5" fill="var(--ladybug-ink, #1A3057)"/>
-  <g stroke="var(--ladybug-ink, #1A3057)" stroke-width="6" stroke-linecap="round" fill="none">
+  <circle cx="50" cy="24.5" r="17.5" fill="var(--ladybug-ink, #141414)"/>
+  <g stroke="var(--ladybug-ink, #141414)" stroke-width="6" stroke-linecap="round" fill="none">
     <path d="M41.5 23.5 31.5 8.5"/>
     <path d="M58.5 23.5 68.5 8.5"/>
   </g>
-  <g fill="var(--ladybug-ink, #1A3057)">
+  <g fill="var(--ladybug-ink, #141414)">
     <circle cx="31.5" cy="7.5" r="5.2"/>
     <circle cx="68.5" cy="7.5" r="5.2"/>
   </g>

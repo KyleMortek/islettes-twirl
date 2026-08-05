@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" aria-hidden="true" focusable="false">
-  <path d="M18 12h84" stroke="var(--baton-shaft, #1A3057)" stroke-width="3" stroke-linecap="round"/>
-  <ellipse cx="12" cy="12" rx="9" ry="7" fill="var(--baton-tip, #A23F3D)" stroke="var(--baton-shaft, #1A3057)" stroke-width="2.5"/>
-  <circle cx="107" cy="12" r="6" fill="var(--baton-tip, #A23F3D)" stroke="var(--baton-shaft, #1A3057)" stroke-width="2.5"/>
+  <path d="M18 12h84" stroke="var(--baton-shaft, #141414)" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="12" cy="12" rx="9" ry="7" fill="var(--baton-tip, #A23F3D)" stroke="var(--baton-shaft, #141414)" stroke-width="2.5"/>
+  <circle cx="107" cy="12" r="6" fill="var(--baton-tip, #A23F3D)" stroke="var(--baton-shaft, #141414)" stroke-width="2.5"/>
 </svg>
