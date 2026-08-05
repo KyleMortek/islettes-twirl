@@ -1,374 +1,236 @@
 /**
- * Islettes Twirl Team - Main JavaScript
- * Handles navigation, interactive features, and accessibility
+ * Islettes' Elite — site behaviour.
+ *
+ * Fully static: no build step, no backend, no external requests. Every
+ * page here works by reading and modifying the DOM that's already on
+ * the page.
  */
-
-(function() {
+(function () {
   'use strict';
 
-  // ============================================
-  // MOBILE NAVIGATION
-  // ============================================
+/* ---------------------------------------------------------------- nav */
 
-  /**
-   * Initialize mobile navigation toggle
-   */
-  function initMobileNav() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
+function initMobileNav() {
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.main-nav');
+  if (!toggle || !nav) return;
 
-    if (!menuToggle || !mainNav) return;
+  const setOpen = (open) => {
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
 
-    // Toggle menu on button click
-    menuToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mainNav.classList.toggle('active');
-      updateMenuToggleAria();
+  setOpen(false);
+  toggle.setAttribute('aria-controls', 'primary-navigation');
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!nav.classList.contains('is-open'));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('is-open') &&
+        !nav.contains(e.target) && !toggle.contains(e.target)) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => setOpen(false)));
+
+  matchMedia('(min-width: 72em)').addEventListener('change', (ev) => {
+    if (ev.matches) setOpen(false);
+  });
+}
+
+function highlightCurrentPage() {
+  const here = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.main-nav a').forEach((link) => {
+    if (link.getAttribute('href') === here) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+}
+
+function initHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  update();
+  addEventListener('scroll', update, { passive: true });
+}
+
+/* ------------------------------------------------------- handbook TOC */
+
+function initTocScrollSpy() {
+  const toc = document.querySelector('.toc');
+  if (!toc) return;
+
+  const links = new Map();
+  toc.querySelectorAll('a[href^="#"]').forEach((a) => {
+    const section = document.getElementById(a.getAttribute('href').slice(1));
+    if (section) links.set(section, a);
+  });
+  if (!links.size) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      links.forEach((a) => a.classList.remove('is-active'));
+      links.get(entry.target)?.classList.add('is-active');
     });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
-        mainNav.classList.remove('active');
-        updateMenuToggleAria();
+  links.forEach((_, section) => observer.observe(section));
+}
+
+/* --------------------------------------------------------------- gallery */
+
+let lightboxDialog;
+
+function ensureLightbox() {
+  if (lightboxDialog) return lightboxDialog;
+
+  lightboxDialog = document.createElement('dialog');
+  lightboxDialog.className = 'lightbox';
+  lightboxDialog.setAttribute('aria-label', 'Photo viewer');
+  lightboxDialog.innerHTML = `
+    <button type="button" class="lightbox-close" aria-label="Close photo viewer">&times;</button>
+    <figure data-lightbox-figure></figure>
+  `;
+  lightboxDialog.querySelector('.lightbox-close')
+    .addEventListener('click', () => lightboxDialog.close());
+  lightboxDialog.addEventListener('click', (e) => {
+    if (e.target === lightboxDialog) lightboxDialog.close();
+  });
+  document.body.append(lightboxDialog);
+  return lightboxDialog;
+}
+
+/** Any `.gallery-item` containing an <img> becomes a lightbox trigger. */
+function initGalleryLightbox() {
+  const items = document.querySelectorAll('.gallery-item img');
+  if (!items.length) return;
+
+  items.forEach((img) => {
+    const item = img.closest('.gallery-item');
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-label', `View larger: ${img.alt}`);
+
+    const open = () => {
+      const dlg = ensureLightbox();
+      const figure = dlg.querySelector('[data-lightbox-figure]');
+      const caption = item.querySelector('figcaption')?.textContent || '';
+      figure.innerHTML = '';
+      const full = document.createElement('img');
+      full.src = img.currentSrc || img.src;
+      full.alt = img.alt;
+      figure.append(full);
+      if (caption) {
+        const cap = document.createElement('figcaption');
+        cap.textContent = caption;
+        figure.append(cap);
       }
-    });
+      dlg.showModal();
+    };
 
-    // Close menu when pressing Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-        mainNav.classList.remove('active');
-        updateMenuToggleAria();
-        menuToggle.focus();
-      }
-    });
-
-    // Close menu after clicking a nav link
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        mainNav.classList.remove('active');
-        updateMenuToggleAria();
-      });
-    });
-
-    // Update ARIA attributes for accessibility
-    function updateMenuToggleAria() {
-      const isExpanded = mainNav.classList.contains('active');
-      menuToggle.setAttribute('aria-expanded', isExpanded);
-      menuToggle.setAttribute('aria-label', isExpanded ? 'Close menu' : 'Open menu');
-    }
-
-    // Initialize ARIA attributes
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.setAttribute('aria-label', 'Open menu');
-    menuToggle.setAttribute('aria-controls', 'main-navigation');
-    mainNav.setAttribute('id', 'main-navigation');
-  }
-
-  // ============================================
-  // ACTIVE NAVIGATION HIGHLIGHTING
-  // ============================================
-
-  /**
-   * Highlight the current page in navigation
-   */
-  function highlightCurrentPage() {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.main-nav a');
-
-    navLinks.forEach(link => {
-      const linkPath = new URL(link.href).pathname;
-
-      // Check if current page matches link
-      if (currentPath === linkPath ||
-          (currentPath === '/' && linkPath.includes('index.html')) ||
-          (currentPath.includes('index.html') && linkPath === '/')) {
-        link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-  }
-
-  // ============================================
-  // SMOOTH SCROLLING
-  // ============================================
-
-  /**
-   * Enhance smooth scrolling for anchor links
-   */
-  function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-
-        // Skip if it's just "#"
-        if (targetId === '#') return;
-
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-          e.preventDefault();
-
-          // Get header height for offset
-          const header = document.querySelector('.site-header');
-          const headerHeight = header ? header.offsetHeight : 0;
-
-          // Calculate position with offset
-          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-
-          // Smooth scroll to target
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-
-          // Update focus for accessibility
-          targetElement.setAttribute('tabindex', '-1');
-          targetElement.focus();
-        }
-      });
-    });
-  }
-
-  // ============================================
-  // FORM HANDLING
-  // ============================================
-
-  /**
-   * Handle contact form submission
-   */
-  function initFormHandling() {
-    const contactForm = document.querySelector('#contact-form');
-
-    if (!contactForm) return;
-
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Get form data
-      const formData = new FormData(contactForm);
-      const data = Object.fromEntries(formData);
-
-      // Basic validation
-      if (!validateForm(data)) {
-        showMessage('Please fill in all required fields correctly.', 'error');
-        return;
-      }
-
-      // In a real application, this would send data to a server
-      // For now, we'll just show a success message
-      console.log('Form data:', data);
-      showMessage('Thank you for your message! We\'ll get back to you soon.', 'success');
-      contactForm.reset();
-    });
-  }
-
-  /**
-   * Validate form data
-   */
-  function validateForm(data) {
-    // Check required fields
-    if (!data.name || !data.email || !data.message) {
-      return false;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      return false;
-    }
-
-    return true;
-  }
-
-  /**
-   * Show form message to user
-   */
-  function showMessage(message, type) {
-    // Remove existing messages
-    const existingMessage = document.querySelector('.form-message');
-    if (existingMessage) {
-      existingMessage.remove();
-    }
-
-    // Create and insert new message
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message ${type}`;
-    messageDiv.textContent = message;
-    messageDiv.setAttribute('role', type === 'error' ? 'alert' : 'status');
-    messageDiv.setAttribute('aria-live', 'polite');
-
-    const form = document.querySelector('#contact-form');
-    if (form) {
-      form.insertAdjacentElement('beforebegin', messageDiv);
-
-      // Scroll to message
-      messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-      // Remove message after 5 seconds
-      setTimeout(() => {
-        messageDiv.style.opacity = '0';
-        setTimeout(() => messageDiv.remove(), 300);
-      }, 5000);
-    }
-  }
-
-  // ============================================
-  // GALLERY FUNCTIONALITY
-  // ============================================
-
-  /**
-   * Initialize gallery interactions
-   */
-  function initGallery() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    if (galleryItems.length === 0) return;
-
-    galleryItems.forEach(item => {
-      // Make gallery items keyboard accessible
-      item.setAttribute('tabindex', '0');
-      item.setAttribute('role', 'button');
-
-      // Handle click and keyboard events
-      const handleActivation = function() {
-        // In a real application, this would open a lightbox or modal
-        console.log('Gallery item activated:', item.dataset.title || 'Untitled');
-      };
-
-      item.addEventListener('click', handleActivation);
-      item.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleActivation();
-        }
-      });
-    });
-  }
-
-  // ============================================
-  // ACCESSIBILITY ENHANCEMENTS
-  // ============================================
-
-  /**
-   * Add skip link functionality
-   */
-  function initSkipLink() {
-    const skipLink = document.querySelector('.skip-link');
-    const mainContent = document.querySelector('#main-content');
-
-    if (skipLink && mainContent) {
-      skipLink.addEventListener('click', function(e) {
+    item.addEventListener('click', open);
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        mainContent.setAttribute('tabindex', '-1');
-        mainContent.focus();
-      });
-    }
-  }
-
-  /**
-   * Announce page changes for screen readers
-   */
-  function announcePageLoad() {
-    const pageTitle = document.querySelector('h1');
-    if (pageTitle) {
-      // Create live region for announcements
-      const liveRegion = document.createElement('div');
-      liveRegion.setAttribute('role', 'status');
-      liveRegion.setAttribute('aria-live', 'polite');
-      liveRegion.className = 'visually-hidden';
-      liveRegion.textContent = `Page loaded: ${pageTitle.textContent}`;
-      document.body.appendChild(liveRegion);
-
-      // Remove after announcement
-      setTimeout(() => liveRegion.remove(), 1000);
-    }
-  }
-
-  // ============================================
-  // SCROLL EFFECTS
-  // ============================================
-
-  /**
-   * Add shadow to header on scroll
-   */
-  function initHeaderScrollEffect() {
-    const header = document.querySelector('.site-header');
-    if (!header) return;
-
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', function() {
-      const currentScroll = window.pageYOffset;
-
-      // Add/remove shadow based on scroll position
-      if (currentScroll > 50) {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.15)';
-      } else {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        open();
       }
+    });
+  });
+}
 
-      lastScroll = currentScroll;
-    }, { passive: true });
+/* -------------------------------------------------------- contact form */
+
+function showFormMessage(form, text, kind) {
+  let host = form.querySelector('[data-form-message]');
+  if (!host) {
+    host = document.createElement('div');
+    host.setAttribute('data-form-message', '');
+    form.prepend(host);
   }
+  host.innerHTML = '';
+  const box = document.createElement('div');
+  box.className = `form-message form-message-${kind}`;
+  box.setAttribute('role', kind === 'error' ? 'alert' : 'status');
+  const p = document.createElement('p');
+  p.textContent = text;
+  box.append(p);
+  host.append(box);
+  host.scrollIntoView({ block: 'nearest' });
+}
 
-  // ============================================
-  // LAZY LOADING IMAGES
-  // ============================================
+/**
+ * No backend is wired up yet, so the form hands the message to the
+ * visitor's own email client via a mailto: link rather than pretending
+ * to submit it somewhere. Nothing is silently discarded.
+ */
+function initContactForm() {
+  const form = document.querySelector('#contact-form');
+  if (!form) return;
 
-  /**
-   * Set up lazy loading for images
-   */
-  function initLazyLoading() {
-    // Check for Intersection Observer support
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            if (img.dataset.src) {
-              img.src = img.dataset.src;
-              img.classList.add('loaded');
-              observer.unobserve(img);
-            }
-          }
-        });
-      });
+  const to = form.dataset.fallbackEmail || 'isletteselite@aol.com';
 
-      // Observe all images with data-src attribute
-      document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-      });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    const name = data.name?.trim();
+    const email = data.email?.trim();
+    const message = data.message?.trim();
+
+    if (!name || !email || !message) {
+      showFormMessage(form, 'Please fill in your name, email, and message.', 'error');
+      return;
     }
-  }
 
-  // ============================================
-  // INITIALIZATION
-  // ============================================
+    const subject = data.subject?.trim() || `Message from ${name}`;
+    const body =
+      `${message}\n\n—\n${name}\n${email}`;
 
-  /**
-   * Initialize all functionality when DOM is ready
-   */
-  function init() {
-    initMobileNav();
-    highlightCurrentPage();
-    initSmoothScroll();
-    initFormHandling();
-    initGallery();
-    initSkipLink();
-    initHeaderScrollEffect();
-    initLazyLoading();
-    announcePageLoad();
+    const mailto = `mailto:${to}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
 
-    console.log('Islettes Twirl Team website initialized');
-  }
+    window.location.href = mailto;
 
-  // Run initialization when DOM is fully loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+    showFormMessage(
+      form,
+      `Your email app should now be open with this message ready to send to ${to}. ` +
+      `If nothing happened, email us directly.`,
+      'success',
+    );
+  });
+}
+
+/* ---------------------------------------------------------------- boot */
+
+function boot() {
+  initMobileNav();
+  highlightCurrentPage();
+  initHeaderScroll();
+  initTocScrollSpy();
+  initGalleryLightbox();
+  initContactForm();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
 
 })();

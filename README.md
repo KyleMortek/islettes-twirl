@@ -1,210 +1,172 @@
-# Islettes Twirl Team Website
+# Islettes' Elite Dance Twirl Team
 
-A professional static website for the Islettes Twirl Team - showcasing our baton twirling programs, team members, events, and providing information for prospective athletes and their families.
+The website for Islettes' Elite Dance Twirl Team — a baton twirling team in
+Western New York with four units from Pre-K through college, competing in NBTA
+and Twirling Unlimited events.
 
-## About
+**Live site:** <https://kylemortek.github.io/islettes-twirl/>
 
-Islettes Twirl Team is a competitive baton twirling organization dedicated to excellence in performance and athletic development. This website serves as our digital home, providing information about our programs, upcoming events, team achievements, and enrollment opportunities.
-
-## Project Structure
-
-```
-islettes-twirl/
-├── index.html              # Home page
-├── about.html              # About us and team information
-├── programs.html           # Program offerings and details
-├── events.html             # Upcoming events and competitions
-├── gallery.html            # Photo gallery
-├── contact.html            # Contact form and information
-├── css/
-│   └── main.css           # Main stylesheet
-├── js/
-│   └── main.js            # JavaScript functionality
-├── assets/
-│   ├── images/            # Image assets
-│   └── icons/             # Icons and favicon
-├── .github/
-│   └── workflows/
-│       └── deploy.yml     # GitHub Pages deployment workflow
-├── LICENSE                 # MIT License
-├── .gitignore             # Git ignore rules
-└── README.md              # This file
-```
-
-## Features
-
-- **Responsive Design**: Mobile-first approach ensuring optimal viewing on all devices
-- **Accessibility**: WCAG AA compliant with semantic HTML and ARIA labels
-- **SEO Optimized**: Unique meta tags, Open Graph tags, and semantic structure
-- **Modern CSS**: Clean design using CSS Grid and Flexbox (no frameworks)
-- **Interactive Navigation**: Smooth scrolling and mobile menu
-- **Contact Form**: Functional contact form with validation
-- **Performance**: Lightweight, fast-loading pages with minimal dependencies
-
-## Pages
-
-1. **Home (index.html)**: Hero section, program overview, and call-to-action
-2. **About (about.html)**: Team history, mission, coaches, and achievements
-3. **Programs (programs.html)**: Detailed program information for all age groups
-4. **Events (events.html)**: Upcoming performances, competitions, and special events
-5. **Gallery (gallery.html)**: Photo galleries from competitions and performances
-6. **Contact (contact.html)**: Contact form, location, and FAQ
-
-## Development Workflow
-
-This project uses a two-branch workflow:
-
-### Branches
-
-- **`develop`**: Development branch for all code changes and updates
-- **`main`**: Production branch - only updated when ready to deploy
-
-### Workflow
-
-1. All development work is done on the `develop` branch
-2. Make changes and commit to `develop`
-3. Test thoroughly on the `develop` branch
-4. When ready to deploy, merge `develop` into `main`
-5. GitHub Actions automatically deploys `main` to GitHub Pages
-
-### Making Changes
-
-```bash
-# Ensure you're on the develop branch
-git checkout develop
-
-# Make your changes to files
-# ...
-
-# Stage and commit changes
-git add .
-git commit -m "type: description of changes"
-
-# Push to develop
-git push origin develop
-
-# When ready to deploy, merge to main
-git checkout main
-git merge develop
-git push origin main
-```
-
-## GitHub Pages Deployment
-
-The site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
-
-### Deployment Process
-
-1. The GitHub Actions workflow (`.github/workflows/deploy.yml`) is triggered on push to `main`
-2. The workflow builds and deploys the site to GitHub Pages
-3. The site becomes available at: `https://[username].github.io/islettes-twirl/`
-
-### Initial Setup
-
-To enable GitHub Pages for this repository:
-
-1. Go to repository Settings > Pages
-2. Under "Build and deployment":
-   - Source: GitHub Actions (the workflow will handle deployment)
-3. The workflow will automatically deploy when `main` is updated
-
-**Note**: The first deployment may take a few minutes. Subsequent deployments are typically faster.
-
-## Technology Stack
-
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with custom properties (CSS variables)
-- **Vanilla JavaScript**: No frameworks or libraries
-- **GitHub Pages**: Static site hosting
-- **GitHub Actions**: Automated deployment
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Accessibility
-
-This website follows WCAG 2.1 AA guidelines:
-
-- Semantic HTML structure
-- ARIA labels and roles
-- Keyboard navigation support
-- Skip to main content link
-- Sufficient color contrast
-- Responsive text sizing
-- Alt text for images (when added)
-- Focus indicators
-
-## Performance
-
-- No external dependencies or frameworks
-- Optimized CSS and JavaScript
-- Minimal HTTP requests
-- Fast load times
-- Mobile-optimized assets
-
-## Local Development
-
-To work on this site locally:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/[username]/islettes-twirl.git
-   cd islettes-twirl
-   ```
-
-2. Checkout the develop branch:
-   ```bash
-   git checkout develop
-   ```
-
-3. Open `index.html` in your browser or use a local server:
-   ```bash
-   # Using Python 3
-   python -m http.server 8000
-
-   # Using Node.js http-server
-   npx http-server
-   ```
-
-4. Make changes and test locally before committing
-
-## Contributing
-
-1. All changes should be made on the `develop` branch
-2. Follow the existing code style and structure
-3. Test changes across different browsers and devices
-4. Use meaningful commit messages following Conventional Commits format
-5. Update documentation as needed
-
-### Commit Message Format
-
-```
-type: brief description
-
-Examples:
-feat: add team roster section to about page
-fix: correct navigation menu alignment on mobile
-docs: update README with deployment instructions
-style: improve contact form layout
-```
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions about this website or the Islettes Twirl Team:
-
-- **Email**: info@islettestwirl.com
-- **Phone**: (555) 123-4567
-- **Website**: [Your deployed site URL]
+All content on this site comes from `Islettes_Elite_Handbook_2025_2026.docx`,
+which lives in the repo root and is the source of truth. If the handbook and
+the website ever disagree, the handbook wins — fix the website.
 
 ---
 
-Built with dedication by the Islettes Twirl Team | © 2026 All Rights Reserved
+## Contents
+
+- [How it's put together](#how-its-put-together)
+- [Updating the site](#updating-the-site)
+- [Project structure](#project-structure)
+- [Local development](#local-development)
+- [Deployment](#deployment)
+- [Adding payments later](#adding-payments-later)
+- [Still to do](#still-to-do)
+
+---
+
+## How it's put together
+
+This is a plain static site: HTML, CSS, and one small JavaScript file. No
+framework, no build step, no backend, no accounts, no database.
+
+```
+index.html, about.html, programs.html, events.html,
+gallery.html, handbook.html, payments.html, contact.html
+        │
+        ├── css/main.css   — the entire stylesheet
+        └── js/main.js     — nav, TOC scroll-spy, gallery lightbox,
+                              contact form (opens a pre-filled email)
+```
+
+Every page is complete on its own — open the HTML file and everything on
+it is real. There's nothing that "loads" or depends on a service being up.
+
+## Updating the site
+
+There's no admin panel — updates are made by editing the HTML files
+directly and pushing to `main`. A few common ones:
+
+**Add or change an event.** `events.html` currently shows an honest "check
+your twirler's folder" message instead of fake dates, since there's no
+calendar source yet. To list a real event, copy the pattern used in the
+"Event day, step by step" section (a `<li class="card reveal">` with a
+heading and a paragraph) into a new list under "Upcoming."
+
+**Add a photo to the gallery.** See `assets/images/README.md` — replace one
+of the placeholder `<div class="photo-slot">` tiles in `gallery.html` with
+a real `<figure class="gallery-item"><img ...></figure>`. The lightbox
+click behaviour picks it up automatically; no JavaScript changes needed.
+
+**Set fee amounts.** `payments.html` has four `.fee-card` articles, each
+currently showing "Contact us for pricing." Once amounts are decided,
+replace `<span class="fee-amount-tbd">Contact us for pricing</span>` with
+the dollar figure, e.g. `$45/month`.
+
+**Update team info, staff, or dress code.** Plain text in `about.html` and
+`programs.html` — edit directly.
+
+**Update the handbook.** `handbook.html` mirrors the current `.docx`. When
+next season's handbook is ready, update both files together.
+
+---
+
+## Project structure
+
+```
+islettes-twirl/
+├── index.html                 Home
+├── about.html                 Team, staff, values
+├── programs.html              The four units + dress code
+├── events.html                Event-day procedures (calendar TBD)
+├── gallery.html                Photos
+├── handbook.html               Full 2025–26 handbook
+├── payments.html                Fee schedule + accepted payment methods
+├── contact.html                Contact form (mailto) + FAQ
+│
+├── css/main.css                Entire stylesheet. No framework.
+├── js/main.js                  Nav, TOC scroll-spy, lightbox, contact form
+│
+├── assets/
+│   ├── images/                 Logo, OG card, SVG art (see its README)
+│   └── icons/                  Favicons
+│
+├── Islettes_Elite_Handbook_2025_2026.docx    Source of truth
+├── sitemap.xml · robots.txt
+└── .github/workflows/deploy.yml
+```
+
+---
+
+## Local development
+
+No dependencies, no install step:
+
+```bash
+python3 -m http.server 8000
+# → http://localhost:8000
+```
+
+Or just open any `.html` file directly in a browser — nothing here
+requires a server.
+
+---
+
+## Deployment
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which publishes
+the repo root to GitHub Pages.
+
+```bash
+git add .
+git commit -m "feat: describe what changed"
+git push origin main
+```
+
+To enable Pages the first time: **Settings → Pages → Source: GitHub
+Actions**.
+
+> Earlier versions of this README described a `develop` → `main` branch
+> workflow. That branch was never created, so the instructions above match
+> what the repo actually does. If you want a staging branch later, create
+> `develop` and reinstate it.
+
+---
+
+## Adding payments later
+
+The original goal for this site included accepting payments online. That
+needs *something* running server-side — even the simplest option (a
+[Stripe Payment Link](https://stripe.com/payments/payment-links)) is
+enough, since it needs no code on this site at all: create a link in the
+Stripe dashboard for each fee, then swap the "Contact us" button on that
+fee's card in `payments.html` for a link to it.
+
+For anything more (dynamic pricing, order records, a database of
+events/photos editable outside of git) this site would need a real
+backend. That's a meaningfully bigger project and deserves its own
+decision about hosting, cost, and who maintains it — worth scoping
+separately when there's a concrete need for it, rather than carrying that
+complexity now.
+
+---
+
+## Still to do
+
+Things that need information only the team has:
+
+- [ ] **Fee amounts** — the handbook states the payment *schedule* but no
+      dollar figures
+- [ ] **Venmo handle** — currently listed as an accepted method without one
+- [ ] **Social media URLs** — the footer icons were removed rather than left
+      as dead `#` links; add them back when there are real accounts
+- [ ] **Team photos** — see `assets/images/README.md` for how to add them
+- [ ] **Practice location** — the handbook says only "WNY"
+- [ ] **Event dates** — no calendar source is wired up yet; see
+      [Updating the site](#updating-the-site)
+- [ ] **2026–27 handbook** — the site currently reflects the 2025–26 season
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).

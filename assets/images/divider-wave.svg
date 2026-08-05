@@ -1,0 +1,5 @@
+<!-- Section divider. Set fill via the --divider-fill custom property. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <path d="M0 34c120-26 240-26 360 0s240 26 360 0 240-26 360 0 240 26 360 0v26H0Z"
+        fill="var(--divider-fill, #1A3057)"/>
+</svg>
